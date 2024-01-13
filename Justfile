@@ -11,7 +11,7 @@ install:
 	@npm i
 	@echo "install watch..."
 	@cargo install cargo-watch
-    @just build
+	@just build
 
 about:
 	@echo {{ env }}
