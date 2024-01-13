@@ -11,7 +11,7 @@ a (mostly) hackable and (hopefully) game agnostic virtual table top
 
 requirement:
 
-- rust >= 1.74.1
+- rust >= 1.75.0
 - nodejs >= v21.5.0
 - [just](https://github.com/casey/just)
 
