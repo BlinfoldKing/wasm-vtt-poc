@@ -37,3 +37,5 @@ build-docker:
 run: 
 	@just build && cargo run --package server
 
+dev:
+	@cargo watch -s 'just run' -i "dist/" -i "target/"
