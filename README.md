@@ -5,7 +5,7 @@ a (mostly) hackable and (hopefully) game agnostic virtual table top
 ## Features
 
 **work in progress**
-![WIP](https://tenor.com/view/cat-typing-work-intense-gif-11385819)
+![WIP](https://media1.tenor.com/m/DaSh5T93TgUAAAAC/cat-typing.gif)
 
 ## Development Setup
 
