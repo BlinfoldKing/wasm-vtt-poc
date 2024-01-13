@@ -1,0 +1,21 @@
+[package]
+name = "ouroboros"
+version = "0.0.0"
+edition = "2021"
+authors = ["Ganesha Danu (hi@blinfoldking.dev)"]
+rust-version = "1.74.1"
+readme = "README.md"
+
+[workspace]
+members = ["packages/vtt", "server"]
+
+[workspace.dependencies]
+actix = "0.13"
+actix-web = "4"
+actix-web-actor = "4"
+
+[profile.dev.package.vtt]
+opt-level = 1
+
+[profile.dev.package.vtt."*"]
+opt-level = 3
