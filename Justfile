@@ -29,5 +29,11 @@ build-server:
 	@echo build server on {{env}}
 	@cargo build --package server --profile {{ if is-dev == "true" { "dev" } else { "release" } }}
 
+build-docker:
+	@just build
+	@cp target/{{ if is-dev == "true" {"debug"} else { "release" } }}/server dist/server
+	@docker build -t ouroboros . --progress=plain
+
 run: 
 	@just build && cargo run --package server
+

@@ -24,7 +24,7 @@ async fn main() -> std::io::Result<()> {
         None => 8080,
     };
     let server = HttpServer::new(|| App::new().service(index).service(dist))
-        .bind(("127.0.0.1", port))?
+        .bind(("0.0.0.0", port))?
         .run();
 
     println!("server running on {}", port);
