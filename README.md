@@ -15,8 +15,13 @@ requirement:
 - nodejs >= v21.5.0
 - [just](https://github.com/casey/just)
 
-### Running Step
+### First Time Building Step
 
 1. for first time setup run: `just install`
-2. copy the `build.env.sample` as `build.env`
-3. build and run the app: `just run`
+2. copy the `build.sample.env` as `build.env`
+3. build the app: `just build`
+
+### First Time Running Step
+
+1. copy the `ouroboros.sample.toml` as `ouroboros.toml`
+2. build and run the app: `just run`
