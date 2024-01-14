@@ -1,0 +1,8 @@
+[general]
+password_salt = "some-random-salt"
+
+[database]
+filepath = "./ouroboros.db"
+
+[http]
+port = 8080

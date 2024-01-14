@@ -35,7 +35,9 @@ build-docker:
 	@docker build -t ouroboros . --progress=plain
 
 run: 
-	@just build && cargo run --package server
+	@just build 
+	@cargo run --package server -- setup
+	@cargo run --package server -- http
 
 dev:
 	@cargo watch -s 'just run' -i "dist/" -i "target/"
