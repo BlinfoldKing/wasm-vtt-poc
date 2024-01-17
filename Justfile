@@ -35,7 +35,8 @@ build-docker:
 	@docker build -t ouroboros . --progress=plain
 
 run: 
-	@just build 
+	@just build
+	@rm -rf vite.config.ts.timestamp*
 	@cargo run --package server -- setup
 	@cargo run --package server -- http
 

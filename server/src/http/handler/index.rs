@@ -15,5 +15,5 @@ async fn dist(params: web::Path<String>) -> Result<NamedFile> {
     let filename = params.into_inner();
     let path = format!("dist/{}", filename);
 
-    Ok(NamedFile::open(path)?)
+    Ok(NamedFile::open(path).unwrap_or(NamedFile::open("dist/index.html").unwrap()))
 }
