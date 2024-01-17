@@ -21,8 +21,8 @@ impl App {
                         .service(handler::ping::index)
                         .service(handler::user::index),
                 )
-                .service(handler::index::index)
-                .service(handler::index::dist);
+                // .service(handler::index::dist)
+                .service(handler::index::index);
             app
         })
         .bind(("0.0.0.0", self.config.http.port))

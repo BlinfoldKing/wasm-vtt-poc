@@ -2,18 +2,12 @@ use actix_files::NamedFile;
 
 use actix_web::{get, web, Result};
 
-#[get("/")]
-async fn index() -> Result<NamedFile> {
-    let filename = "index.html";
-    let path = format!("dist/{}", filename);
+#[get("/{path:.*}")]
+async fn index(params: web::Path<String>) -> Result<NamedFile> {
+    let path = params.into_inner();
 
-    Ok(NamedFile::open(path)?)
-}
-
-#[get("/{filename:.*}")]
-async fn dist(params: web::Path<String>) -> Result<NamedFile> {
-    let filename = params.into_inner();
-    let path = format!("dist/{}", filename);
-
-    Ok(NamedFile::open(path).unwrap_or(NamedFile::open("dist/index.html").unwrap()))
+    match path.split("/").collect::<Vec<&str>>()[0] {
+        "_app" => Ok(NamedFile::open(format!("dist/{}", path))?),
+        _ => Ok(NamedFile::open("dist/index.html")?),
+    }
 }

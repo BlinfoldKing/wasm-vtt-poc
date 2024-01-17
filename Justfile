@@ -12,13 +12,14 @@ install:
 	@echo "install watch..."
 	@cargo install cargo-watch
 	@just build
+	@npm i concurrently
 
 about:
 	@echo {{ env }}
 
 build:
 	@just build-pkgs
-	@yarn build
+	@yarn {{ if is-dev == "true" {"build-dev"} else {"build"} }}
 	@just build-server
 
 build-pkgs:
@@ -38,7 +39,13 @@ run:
 	@just build
 	@rm -rf vite.config.ts.timestamp*
 	@cargo run --package server -- setup
+	@concurrently "just http" "just browser"
+
+http:
 	@cargo run --package server -- http
+
+browser: 
+	@open http://localhost:8080
 
 dev:
 	@cargo watch -s 'just run' -i "dist/" -i "target/"

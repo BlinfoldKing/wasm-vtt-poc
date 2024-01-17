@@ -1,13 +1,15 @@
-<script lang="ts">
-	import { onMount } from 'svelte';
-	import VTT from '$lib/vtt';
+<div class="prose">
+	<h1 class="text-3xl">Debug Page</h1>
+	<ul>
+		<li>
+			<a class="link" href="/login">/login</a>
+		</li>
 
-	onMount(async () => {
-		await VTT.init();
-	});
-</script>
-
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<a href="/login">to login</a>
+		<li>
+			<a class="link" href="/campaigns">/campaigns</a>
+		</li>
+		<li>
+			<a class="link" href="/game">/game</a>
+		</li>
+	</ul>
+</div>
