@@ -9,6 +9,7 @@ about = "a (mostly) hackable and (hopefully) game agnostic virtual table top"
 [dependencies]
 config = { version = "0.13.1", features = ["toml"] }
 actix-files = "0.6.2"
+bevy = { workspace = true }
 actix-web = { workspace = true }
 uuid = { workspace = true }
 serde = { workspace = true }
@@ -19,3 +20,5 @@ tokio = { version = "1.35.1", features = ["macros", "rt-multi-thread"] }
 bcrypt = "0.15.0"
 r2d2 = "0.8.10"
 r2d2_sqlite = "0.23.0"
+tokio-util = { workspace = true }
+bevy_renet = { workspace = true }

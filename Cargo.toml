@@ -5,6 +5,10 @@ edition = "2021"
 authors = ["Ganesha Danu (hi@blinfoldking.dev)"]
 rust-version = "1.75.0"
 readme = "README.md"
+repository = "https://github.com/BlinfoldKing/ouroboros"
+
+[workspace.package]
+repository = "https://github.com/BlinfoldKing/ouroboros"
 
 [workspace]
 members = ["packages/vtt", "server"]
@@ -16,6 +20,11 @@ actix-web-actor = "4"
 serde = { version = "1.0.195", features = ["derive"] }
 serde_json = "1.0.111"
 tokio = { version = "1.35.1", features = ["macros", "rt-multi-thread"] }
+ron = "0.8"
+renet = "0.0.14"
+bevy = { version = "0.12.1", features = ["default"] }
+tokio-util = "0.7.10"
+bevy_renet = "0.0.10"
 
 [workspace.dependencies.uuid]
 version = "1.6.1"

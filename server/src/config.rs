@@ -6,16 +6,23 @@ use serde::Deserialize;
 pub struct Cfg {
     pub general: General,
     pub http: Http,
+    pub renet: Renet,
     pub database: Database,
 }
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct General {
+    pub host: String,
     pub password_salt: String,
 }
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct Http {
+    pub port: u16,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Renet {
     pub port: u16,
 }
 
