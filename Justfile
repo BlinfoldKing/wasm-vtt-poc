@@ -17,14 +17,13 @@ install:
 about:
 	@echo {{ env }}
 
-build:
-	@just build-pkgs
-	@yarn {{ if is-dev == "true" {"build-dev"} else {"build"} }}
-	@just build-server
-
 build-pkgs:
 	@echo build engine on {{env}}
-	@wasm-pack build packages/vtt --target web {{ if is-dev == "true" { "--dev" } else { "--release" } }}
+	@wasm-pack build packages/vtt --target web {{ if is-dev == "true" { "--dev" } else { "--release" } }} --mode normal
+
+build-client:
+	@just build-pkgs
+	@yarn {{ if is-dev == "true" {"build-dev"} else {"build"} }}
 
 build-server:
 	@echo build server on {{env}}
@@ -35,17 +34,30 @@ build-docker:
 	@cp target/{{ if is-dev == "true" {"debug"} else { "release" } }}/server dist/server
 	@docker build -t ouroboros . --progress=plain
 
+build:
+	@just build-client
+	@just build-server
+
 run: 
 	@just build
 	@rm -rf vite.config.ts.timestamp*
 	@cargo run --package server -- setup
-	@concurrently "just http" "just browser"
+	@cargo run --package server -- run
 
-http:
-	@cargo run --package server -- http
+run-server:
+	@cargo run --package server -- serve
+
+dev-server:
+	@cargo watch --workdir ./server -s 'just build-server && just run-server'
+
+dev-client:
+	@cargo watch -w src -w packages -s 'just build-client'
 
 browser: 
 	@open http://localhost:8080
 
-dev:
+watch:
 	@cargo watch -s 'just run' -i "dist/" -i "target/"
+
+dev:
+	@concurrently -c green,blue --names "client,server" "just dev-client" "just dev-server"
