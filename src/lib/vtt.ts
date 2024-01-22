@@ -1,7 +1,8 @@
-import init from '../../packages/vtt/pkg';
+import init, { attach_canvas } from '../../packages/vtt/pkg';
 
 const VTT = {
-	init
+	init,
+	attach_canvas
 };
 
 export default VTT;

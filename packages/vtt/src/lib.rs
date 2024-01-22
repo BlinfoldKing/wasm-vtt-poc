@@ -1,4 +1,8 @@
+use game::Game;
 use wasm_bindgen::prelude::*;
+
+pub mod game;
+pub mod plugins;
 
 #[wasm_bindgen]
 extern "C" {
@@ -6,9 +10,12 @@ extern "C" {
     fn console_log(s: &str);
 }
 
-// Called when the wasm module is instantiated
 #[wasm_bindgen(start)]
-pub fn main() -> Result<(), JsValue> {
-    console_log("vtt...loaded");
-    Ok(())
+pub fn min() {
+    console_log("vtt package...loaded")
+}
+
+#[wasm_bindgen]
+pub fn attach_canvas(canvas_id: String) {
+    Game::new(canvas_id).run();
 }

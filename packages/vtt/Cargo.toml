@@ -1,13 +1,16 @@
 [package]
 name = "vtt"
-version = "0.0.0"
 edition = "2021"
+description = "vtt lib for ouroboros"
+authors = ["Ganesha Danu (hi@blinfoldking.dev)"]
+version = "0.0.0"
+repository = "https://github.com/BlinfoldKing/ouroboros"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-bevy = { version = "0.12.1" }
-wasm-bindgen = "0.2"
+bevy = { workspace = true }
+wasm-bindgen = "0.2.90"
+ron = { workspace = true }
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -17,3 +20,8 @@ opt-level = 1
 
 [profile.dev.package."*"]
 opt-level = 3
+
+[profile.release]
+opt-level = 's'
+lto = true
+codegen-units = 1
