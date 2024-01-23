@@ -28,7 +28,6 @@ impl App {
             )),
         }?;
         tracing_subscriber::fmt()
-            .with_thread_names(true)
             .with_target(true)
             .with_file(false)
             .with_line_number(true)

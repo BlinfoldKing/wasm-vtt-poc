@@ -2,10 +2,10 @@ use std::fmt::Display;
 
 use serde::Serialize;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct Error {
-    message: String,
-    kind: ErrorKind,
+    pub message: String,
+    pub kind: ErrorKind,
 }
 
 impl Display for Error {
@@ -14,10 +14,9 @@ impl Display for Error {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub enum ErrorKind {
     Config,
-    Http,
 
     InternalError,
 

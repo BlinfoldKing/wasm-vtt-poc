@@ -1,4 +1,4 @@
-use crate::error::Error;
+use crate::{error::Error, http::Response};
 use actix_web::{get, HttpResponse};
 use serde::Serialize;
 
@@ -9,5 +9,5 @@ struct Ping<'a> {
 
 #[get("/ping")]
 async fn index() -> Result<HttpResponse, Error> {
-    Ok(HttpResponse::Ok().json(Ping { ping: "pong" }))
+    Ok(Response::ok(Ping { ping: "pong" }))
 }
