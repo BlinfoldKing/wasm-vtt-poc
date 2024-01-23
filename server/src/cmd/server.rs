@@ -29,12 +29,12 @@ impl RunCommand<ServerRunner> for App {
         let http_runner = tokio::spawn(server.run());
         let engine_runner = tokio::spawn(async move { engine.run() });
 
-        println!("renet server run on :{}", self.config.renet.port);
-        println!("http server run on :{}", self.config.http.port);
+        tracing::info!("renet server run on :{}", self.config.renet.port);
+        tracing::info!("http server run on :{}", self.config.http.port);
 
         match tokio::signal::ctrl_c().await {
             Ok(()) => {
-                println!("exited");
+                tracing::info!("exited");
                 process::exit(0x100) // nuke exit; need better way to exit if exists
             }
             _ => (),

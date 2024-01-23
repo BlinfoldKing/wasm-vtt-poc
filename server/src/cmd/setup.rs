@@ -15,8 +15,8 @@ impl RunCommand<SetupRunner> for App {
             }
         }
 
-        println!("initializing...");
-        println!("create user...");
+        tracing::info!("initializing...");
+        tracing::info!("create user...");
         usecase.user.create_user(CreateUserRequest {
             username: "admin".to_string(),
             password: "pass".to_string(),

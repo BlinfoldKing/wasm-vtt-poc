@@ -22,3 +22,5 @@ r2d2 = "0.8.10"
 r2d2_sqlite = "0.23.0"
 tokio-util = { workspace = true }
 bevy_renet = { workspace = true }
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"

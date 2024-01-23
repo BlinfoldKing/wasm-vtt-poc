@@ -8,6 +8,7 @@ pub struct Cfg {
     pub http: Http,
     pub renet: Renet,
     pub database: Database,
+    pub logging: Logging,
 }
 
 #[derive(Debug, Deserialize, Clone)]
@@ -29,6 +30,11 @@ pub struct Renet {
 #[derive(Debug, Deserialize, Clone)]
 pub struct Database {
     pub filepath: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct Logging {
+    pub level: String,
 }
 
 impl Cfg {

@@ -32,6 +32,7 @@ impl Display for ErrorKind {
 
 impl Error {
     pub fn new(message: String, kind: ErrorKind) -> Error {
+        tracing::error!(message);
         Error { message, kind }
     }
 }

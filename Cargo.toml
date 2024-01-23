@@ -24,7 +24,8 @@ ron = "0.8"
 renet = "0.0.14"
 bevy = { version = "0.12.1", features = ["default"] }
 tokio-util = "0.7.10"
-bevy_renet = "0.0.10"
+bevy_renet = { version = "0.0.10", features = ["transport", "serde"] }
+bincode = "1.3.3"
 
 [workspace.dependencies.uuid]
 version = "1.6.1"
