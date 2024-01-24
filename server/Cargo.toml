@@ -24,3 +24,7 @@ tokio-util = { workspace = true }
 bevy_renet = { workspace = true }
 tracing = "0.1.40"
 tracing-subscriber = "0.3.18"
+jsonwebtoken = "9.2.0"
+chrono = { workspace = true }
+futures = "0.3.30"
+futures-util = "0.3.30"

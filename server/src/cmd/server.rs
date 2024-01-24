@@ -12,10 +12,12 @@ impl RunCommand<ServerRunner> for App {
     async fn run(&mut self) -> Result<(), crate::error::Error> {
         let usecase = self.usecase.clone();
         let engine = self.engine.clone();
+        let config = self.config.clone();
 
         // setup http server
         let server = HttpServer::new(move || {
             HttpApp::new()
+                .app_data(web::Data::new(config.clone()))
                 .app_data(web::Data::new(usecase.clone()))
                 .app_data(web::Data::new(engine.clone()))
                 .configure(Self::http_services)
@@ -34,6 +36,9 @@ impl RunCommand<ServerRunner> for App {
 
         match tokio::signal::ctrl_c().await {
             Ok(()) => {
+                http_runner.abort();
+                engine_runner.abort();
+
                 tracing::info!("exited");
                 process::exit(0x100) // nuke exit; need better way to exit if exists
             }

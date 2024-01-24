@@ -19,6 +19,10 @@ pub enum ErrorKind {
     Config,
 
     InternalError,
+    NotFound,
+    Unauthorized,
+    Unauthenticated,
+    BadRequest,
 
     Other,
 }

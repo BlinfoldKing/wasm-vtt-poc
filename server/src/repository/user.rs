@@ -9,5 +9,6 @@ where
 {
     fn save_user(&self, user: User) -> Result<User, Error>;
     fn get_user_by_id(&self, id: uuid::Uuid) -> Result<Option<User>, Error>;
+    fn get_user_by_username(&self, username: String) -> Result<Option<User>, Error>;
     fn get_users(&self) -> Result<Vec<User>, Error>;
 }

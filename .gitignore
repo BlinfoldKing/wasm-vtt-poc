@@ -11,5 +11,6 @@ vite.config.ts.timestamp-*
 /dist
 **/target
 build.env
+**/api.env
 ouroboros.db
 ouroboros.toml

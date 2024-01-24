@@ -1,13 +1,7 @@
-use crate::{error::Error, http::Response};
-use actix_web::{get, HttpResponse};
-use serde::Serialize;
+use crate::entities::ping::Ping;
+use crate::http::prelude::*;
 
-#[derive(Serialize)]
-struct Ping<'a> {
-    ping: &'a str,
-}
-
-#[get("/ping")]
-async fn index() -> Result<HttpResponse, Error> {
+#[get("")]
+async fn index() -> EndpointResult {
     Ok(Response::ok(Ping { ping: "pong" }))
 }

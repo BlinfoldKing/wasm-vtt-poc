@@ -36,6 +36,23 @@ impl UserRepository for SqliteRepository {
             .map_err(|err| Error::new(err.to_string(), ErrorKind::InternalError))
     }
 
+    fn get_user_by_username(&self, username: String) -> Result<Option<User>, Error> {
+        self.conn()?
+            .query_row(
+                "SELECT id, username, password_hash FROM users WHERE username = ?1",
+                [username],
+                |row| {
+                    Ok(User {
+                        id: row.get(0)?,
+                        username: row.get(1)?,
+                        password_hash: row.get(2)?,
+                    })
+                },
+            )
+            .optional()
+            .map_err(|err| Error::new(err.to_string(), ErrorKind::InternalError))
+    }
+
     fn get_users(&self) -> Result<Vec<User>, Error> {
         let conn = self.conn()?;
         let mut stmt = conn

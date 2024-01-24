@@ -15,6 +15,7 @@ pub struct Cfg {
 pub struct General {
     pub host: String,
     pub password_salt: String,
+    pub secret: String,
 }
 
 #[derive(Debug, Deserialize, Clone)]

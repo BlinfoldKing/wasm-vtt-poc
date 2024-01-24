@@ -10,13 +10,8 @@ pub struct SettingUsecase<T: SettingRepository> {
 }
 
 impl<T: SettingRepository> SettingUsecase<T> {
-    pub fn new(config: Cfg) -> Result<Self, Error> {
-        let repo = T::new(&config)?;
-
-        Ok(Self {
-            config,
-            repo: *repo,
-        })
+    pub fn new(config: Cfg, repo: T) -> Result<Self, Error> {
+        Ok(Self { config, repo })
     }
 
     pub fn set_setting(&self, key: String, value: String) -> Result<Setting, Error> {

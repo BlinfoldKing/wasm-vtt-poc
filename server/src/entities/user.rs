@@ -2,7 +2,7 @@ use crate::error::{Error, ErrorKind};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct User {
     pub id: Uuid,
     pub username: String,
@@ -32,5 +32,11 @@ impl User {
             username,
             password_hash,
         })
+    }
+
+    pub fn validate_password(&self, password: String) -> Result<(), Error> {
+        let _ = bcrypt::verify(password, &*self.password_hash)
+            .map_err(|_| Error::new("invalid password".to_owned(), ErrorKind::BadRequest))?;
+        Ok(())
     }
 }

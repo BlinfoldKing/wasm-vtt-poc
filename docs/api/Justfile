@@ -1,0 +1,24 @@
+# you need to https://httpie.io/ to run this file
+set dotenv-filename := "api.env"
+
+host := env_var_or_default("API_HOST", "localhost:8080")
+token := env_var_or_default("API_TOKEN", "some_token")
+
+post_auth_login:
+	@http POST {{host}}/v1/auth/login @request/auth/login.json
+
+get_users:
+	@echo {{token}}
+	@http GET {{host}}/v1/users \
+		Authorization:'Bearer {{token}}'
+
+get_users_me:
+	@http GET {{host}}/v1/users/me \
+		Authorization:'Bearer {{token}}'
+
+get_ping:
+	@http GET {{host}}/v1/ping \
+		Authorization:'Bearer {{token}}'
+
+
+
