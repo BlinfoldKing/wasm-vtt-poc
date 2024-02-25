@@ -9,6 +9,12 @@ pub struct User {
     pub password_hash: String,
 }
 
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct UserResponse {
+    pub id: Uuid,
+    pub username: String,
+}
+
 #[derive(Serialize, Deserialize, Clone)]
 pub struct CreateUserRequest {
     pub username: String,
@@ -38,5 +44,12 @@ impl User {
         let _ = bcrypt::verify(password, &*self.password_hash)
             .map_err(|_| Error::new("invalid password".to_owned(), ErrorKind::BadRequest))?;
         Ok(())
+    }
+
+    pub fn to_response(&self) -> UserResponse {
+        UserResponse {
+            id: self.id,
+            username: self.username.clone(),
+        }
     }
 }

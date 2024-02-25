@@ -27,7 +27,7 @@ impl<UserRepo: UserRepository> AuthUsecase<UserRepo> {
                 let token = JWTToken::new(self.config.general.secret.clone(), user.clone())?;
 
                 Ok(LoginResponse {
-                    user,
+                    user: user.to_response(),
                     token: token.get(),
                 })
             }

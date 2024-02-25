@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use super::user::User;
+use super::user::{User, UserResponse};
 
 #[derive(Deserialize)]
 pub struct LoginRequest {
@@ -10,6 +10,6 @@ pub struct LoginRequest {
 
 #[derive(Serialize)]
 pub struct LoginResponse {
-    pub user: User,
+    pub user: UserResponse,
     pub token: String,
 }

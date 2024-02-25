@@ -2,7 +2,7 @@ use chrono::{Duration, Local};
 use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use serde::{Deserialize, Serialize};
 
-use super::user::User;
+use super::user::{User, UserResponse};
 use crate::error::{Error, ErrorKind};
 
 pub struct JWTToken(String);
@@ -11,11 +11,11 @@ pub struct JWTToken(String);
 struct Claims {
     pub iat: u64,
     pub exp: u64,
-    pub user: User,
+    pub user: UserResponse,
 }
 
 impl Claims {
-    pub fn new(user: User) -> Result<Self, Error> {
+    pub fn new(user: UserResponse) -> Result<Self, Error> {
         let now = Local::now();
         let iat = now.timestamp() as u64;
         let exp = (now + Duration::hours(12)).timestamp() as u64;
@@ -28,7 +28,7 @@ impl JWTToken {
     pub fn new(secret: String, user: User) -> Result<Self, Error> {
         let token = encode(
             &Header::new(jsonwebtoken::Algorithm::HS256),
-            &Claims::new(user)?,
+            &Claims::new(user.to_response())?,
             &EncodingKey::from_secret(secret.as_ref()),
         )
         .map_err(|err| Error::new(err.to_string(), ErrorKind::InternalError))?;
@@ -36,7 +36,7 @@ impl JWTToken {
         Ok(Self(token))
     }
 
-    pub fn verify(&self, secret: String) -> Result<User, Error> {
+    pub fn verify(&self, secret: String) -> Result<UserResponse, Error> {
         let token = decode::<Claims>(
             &self.0,
             &DecodingKey::from_secret(secret.as_ref()),
